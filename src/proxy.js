@@ -10,12 +10,16 @@ export async function proxy(request) {
       request.nextUrl.pathname.length > 9);
 
   try {
-    const url = process.env.BETTER_AUTH_URL || 'http://localhost:3000';
+    const url = process.env.BETTER_AUTH_URL || request.nextUrl.origin;
     const response = await fetch(`${url}/api/auth/get-session`, {
       headers: {
         cookie: request.headers.get('cookie') || '',
       },
     });
+
+    if (!response.ok) {
+        throw new Error(`Auth session check failed with status: ${response.status}`);
+    }
 
     const session = await response.json();
 
@@ -36,3 +40,5 @@ export async function proxy(request) {
 export const config = {
   matcher: ['/profile/:path*', '/courses/:id*', '/login', '/register'],
 };
+
+export default proxy;
