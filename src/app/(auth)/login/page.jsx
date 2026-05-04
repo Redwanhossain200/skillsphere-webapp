@@ -39,7 +39,7 @@ const LoginPage = () => {
       <div className="card w-full max-w-lg bg-base-100 shadow-xl border border-base-200">
         <div className="card-body p-8 sm:p-10">
           <h2 className="font-bold text-3xl text-center text-base-content mb-8">
-            Login your account.....
+            Login your account
           </h2>
 
           <div className="divider mb-8"></div>
