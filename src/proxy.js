@@ -1,3 +1,5 @@
+import dns from 'node:dns';
+dns.setServers(['8.8.8.8', '8.8.4.4']);
 import { NextResponse } from 'next/server';
 
 export async function proxy(request) {
@@ -18,7 +20,9 @@ export async function proxy(request) {
     });
 
     if (!response.ok) {
-        throw new Error(`Auth session check failed with status: ${response.status}`);
+      throw new Error(
+        `Auth session check failed with status: ${response.status}`,
+      );
     }
 
     const session = await response.json();
